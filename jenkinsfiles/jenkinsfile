@@ -12,7 +12,7 @@ pipeline {
 				script{
 					def hosts_link_file = "${JENKINS_HOME}/hosts_links.txt"
 					if (fileExists(file: "${hosts_link_file}")) {
-						def host_properties = readProperties file: hosts_link_file
+						def host_properties = readProperties file: "${hosts_link_file}"
 						ANSIBLE_GIT_SOURCE = host_properties.ANSIBLE_INV_GIT_LINK
 					}
 					else {
