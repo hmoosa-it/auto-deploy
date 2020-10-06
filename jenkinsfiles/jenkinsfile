@@ -16,7 +16,7 @@ pipeline {
 						ANSIBLE_GIT_SOURCE = host_properties.ANSIBLE_INV_GIT_LINK
 					}
 					else {
-						error ("File hosts_link_file does not exist")
+						error ("File ${hosts_link_file} does not exist")
 					}
 				}
 
