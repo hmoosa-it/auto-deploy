@@ -22,7 +22,7 @@ pipeline {
 
 					checkout([
 					$class: 'GitSCM',
-					userRemoteConfigs: [[ credentialsId: 'hmoosa-it',
+					userRemoteConfigs: [[ credentialsId: 'my-github',
 					url: "${ANSIBLE_GIT_SOURCE}"]]])
 			}
 		}
