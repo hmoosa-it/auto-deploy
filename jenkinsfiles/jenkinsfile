@@ -18,12 +18,12 @@ pipeline {
 					else {
 						error ("File hosts_link_file does not exist")
 					}
+				}
 
 					checkout([
 					$class: 'GitSCM',
 					userRemoteConfigs: [[ credentialsId: 'hmoosa-it',
 					url: "${ANSIBLE_GIT_SOURCE}"]]])
-				}
 			}
 		}
     }
