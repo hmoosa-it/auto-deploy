@@ -22,6 +22,7 @@ pipeline {
 
 					checkout([
 					$class: 'GitSCM',
+					branches: [[name: '*/master']],
 					userRemoteConfigs: [[ credentialsId: 'my-github',
 					url: "${ANSIBLE_GIT_SOURCE}"]]])
 			}
