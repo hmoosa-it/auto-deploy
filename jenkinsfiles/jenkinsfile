@@ -9,20 +9,22 @@ pipeline {
 		
 		stage('Get Ansible Inventory from GIT'){
 			steps{
-				println "Jenkins Home = ${JENKINS_HOIME}"
-				def hosts_link_file = "${JENKINS_HOME}/hosts_links.txt"
-				if (fileExists(file: ${hosts_link_file})) {
-					def host_properties = readProperties file: hosts_link_file
-					ANSIBLE_GIT_SOURCE = host_properties.ANSIBLE_INV_GIT_LINK
+				script{
+					println "Jenkins Home = ${JENKINS_HOIME}"
+					def hosts_link_file = "${JENKINS_HOME}/hosts_links.txt"
+					if (fileExists(file: ${hosts_link_file})) {
+						def host_properties = readProperties file: hosts_link_file
+						ANSIBLE_GIT_SOURCE = host_properties.ANSIBLE_INV_GIT_LINK
+					}
+					else {
+						error ("File hosts_link_file does not exist")
+					}
+
+					checkout([
+					$class: 'GitSCM',
+					userRemoteConfigs: [[ credentialsId: 'hmoosa-it',
+					url: "${ANSIBLE_GIT_SOURCE}"]]])
 				}
-				else {
-					error ("File hosts_link_file does not exist")
-				}
-				
-				checkout([
-				$class: 'GitSCM',
-				userRemoteConfigs: [[ credentialsId: 'hmoosa-it',
-				url: "${ANSIBLE_GIT_SOURCE}"]]])
 			}
 		}
     }
