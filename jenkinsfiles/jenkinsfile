@@ -9,6 +9,7 @@ pipeline {
 		
 		stage('Get Ansible Inventory from GIT'){
 			steps{
+				println "Jenkins Home = ${JENKINS_HOIME}"
 				def hosts_link_file = "${JENKINS_HOME}/hosts_links.txt"
 				if (fileExists(file: ${hosts_link_file})) {
 					def host_properties = readProperties file: hosts_link_file
