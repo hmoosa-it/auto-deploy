@@ -24,8 +24,14 @@ pipeline {
 					$class: 'GitSCM',
 					branches: [[name: '*/main']],
 					userRemoteConfigs: [[ credentialsId: 'my-github',
+					extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ansible-inventory']],
 					url: "${ANSIBLE_GIT_SOURCE}"]]])
 			}
+		}
+
+		stage('Ping and check connectivity'){
+		    ansiblePlaybook(
+		        playbook:
 		}
     }
 }
