@@ -28,10 +28,5 @@ pipeline {
 					url: "${ANSIBLE_GIT_SOURCE}"]]])
 			}
 		}
-
-		stage('Ping and check connectivity'){
-		    ansiblePlaybook(
-		        playbook:
-		}
     }
 }
