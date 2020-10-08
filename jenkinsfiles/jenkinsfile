@@ -23,8 +23,8 @@ pipeline {
 					checkout([
 					$class: 'GitSCM',
 					branches: [[name: '*/main']],
-					userRemoteConfigs: [[ credentialsId: 'my-github',
 					extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ansible-inventory']],
+					userRemoteConfigs: [[ credentialsId: 'my-github',
 					url: "${ANSIBLE_GIT_SOURCE}"]]])
 			}
 		}
