@@ -1,1 +1,10 @@
+---
 
+- name: This is play1
+  hosts: all_nodes
+  tasks:
+    - name: hostname check
+      command: hostname
+
+    - name: ping
+      ping:

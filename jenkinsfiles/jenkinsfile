@@ -28,5 +28,19 @@ pipeline {
 					url: "${ANSIBLE_GIT_SOURCE}"]]])
 			}
 		}
+
+		stage('Start Maintenance'){
+		    steps{
+		        script{
+		            def ANSIBLE_PLAYBOOK = "${WORKSPACE}/ansible/playbooks/start_maintenance.yaml"
+		            def ANSIBLE_INVENTORY = "${WORKSPACE}/ansible-inventory/dev/inventory"
+		        }
+		        ansiblePlaybook(
+		            playbook: "${ANSIBLE_PLAYBOOK}",
+		            inventory: "${ANSIBLE_INVENTORY}"
+		        )
+		    }
+		}
+
     }
 }
