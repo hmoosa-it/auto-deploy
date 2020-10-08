@@ -32,8 +32,8 @@ pipeline {
 		stage('Start Maintenance'){
 		    steps{
 		        script{
-		            def ANSIBLE_PLAYBOOK = "${WORKSPACE}/ansible/playbooks/start_maintenance.yaml"
-		            def ANSIBLE_INVENTORY = "${WORKSPACE}/ansible-inventory/dev/inventory"
+		            ANSIBLE_PLAYBOOK = "${WORKSPACE}/ansible/playbooks/start_maintenance.yaml"
+		            ANSIBLE_INVENTORY = "${WORKSPACE}/ansible-inventory/dev/inventory"
 		        }
 		        ansiblePlaybook(
 		            playbook: "${ANSIBLE_PLAYBOOK}",
