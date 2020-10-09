@@ -6,6 +6,12 @@ library identifier: 'auto-deploy-lib@main', retriever: modernSCM(
 
 pipeline {
     agent any
+
+    options {
+        timestamps()
+        ansiColor('xterm')
+    }
+
     stages {
         stage('First Stage'){
           steps{
