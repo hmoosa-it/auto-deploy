@@ -11,6 +11,9 @@ pipeline {
 			steps{
 				script{
 					def hosts_link_file = "${JENKINS_HOME}/hosts_links.txt"
+					ANSIBLE_BRANCH = "*/main"
+					ANSIBLE_GIT_CRED = "my-github"
+					ANSIBLE_WORKSPACE_CHECKOUT_DIR = "ansible-inventory"
 					if (fileExists(file: "${hosts_link_file}")) {
 						def host_properties = readProperties file: "${hosts_link_file}"
 						ANSIBLE_GIT_SOURCE = host_properties.ANSIBLE_INV_GIT_LINK
@@ -20,12 +23,7 @@ pipeline {
 					}
 				}
 
-					checkout([
-					$class: 'GitSCM',
-					branches: [[name: '*/main']],
-					extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ansible-inventory']],
-					userRemoteConfigs: [[ credentialsId: 'my-github',
-					url: "${ANSIBLE_GIT_SOURCE}"]]])
+				gitCheckOut(ANSIBLE_GIT_SOURCE, ANSIBLE_BRANCH, ANSIBLE_GIT_CRED, ANSIBLE_WORKSPACE_CHECKOUT_DIR )
 			}
 		}
 
